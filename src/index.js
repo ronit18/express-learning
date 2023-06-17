@@ -12,18 +12,35 @@ app.use((req, res, next) => {
 
 const items = [
 	{
-		item: 'new',
-		total: 43,
+		item: 'milk',
+		total: 3,
 	},
-
 	{
-		item: 'new',
+		item: 'bread',
+		total: 53,
+	},
+	{
+		item: 'cheese',
+		total: 23,
+	},
+	{
+		item: 'eggs',
+		total: 13,
+	},
+	{
+		item: 'butter',
 		total: 43,
 	},
 ];
 
 app.get('/list', (req, res) => {
 	res.send(items);
+});
+
+app.get('/list/:item', (req, res) => {
+	const { item } = req.params;
+	const itemsFind = items.find((i) => i.item === item);
+	res.send(itemsFind);
 });
 
 app.post('/post', (req, res) => {
