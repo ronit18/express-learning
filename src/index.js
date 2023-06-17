@@ -1,5 +1,6 @@
 const express = require('express');
 const listRouter = require('./routes/list');
+const storesRouter = require('./routes/stores');
 
 const app = express();
 app.use(express.json());
@@ -12,5 +13,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/list', listRouter);
+app.use('/api/stores', storesRouter);
 
 app.listen(PORT, () => console.log(`Running server on ${PORT} 🚀 `));
