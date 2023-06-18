@@ -1,9 +1,11 @@
 const express = require('express');
 const listRouter = require('./routes/list');
 const storesRouter = require('./routes/stores');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded());
 const PORT = 3001;
 

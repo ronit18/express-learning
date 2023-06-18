@@ -25,6 +25,10 @@ const items = [
 ];
 
 router.get('/', (req, res) => {
+	console.log(req.cookies);
+	res.cookie('visited', true, {
+		maxAge: 10000,
+	});
 	res.send(items);
 });
 
