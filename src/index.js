@@ -5,21 +5,7 @@ const cartRouter = require('./routes/cart');
 const authRouter = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const dotenv = require('dotenv');
-dotenv.config();
-
-const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI;
-
-mongoose
-	.connect(MONGODB_URI)
-	.then(() => {
-		console.log('Connected to MongoDB 🚀');
-	})
-	.catch((err) => {
-		console.log('Error connecting to MongoDB 😢');
-		console.log(err);
-	});
+require('./database');
 
 const app = express();
 app.use(express.json());
@@ -37,12 +23,7 @@ app.use('/api/auth', authRouter);
 
 app.use((req, res, next) => {
 	console.log(`Request : ${req.method} ${req.url} ${new Date()}`);
-	if (req.session.user) {
-		console.log(`User: ${req.session.user}`);
-		next();
-	} else {
-		res.sendStatus(401);
-	}
+	next();
 });
 
 app.use('/api/list', listRouter);
